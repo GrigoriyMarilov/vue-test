@@ -48,11 +48,12 @@
         >Присутствие</label
       >
       <div class="flex items-center">
-        <Input
+        <CheckBox
           type="checkbox"
-          v-model="isHere"
+          @update:model-value="isHere = $event"
+          :model-value="isHere"
           id="create_user_isHere"
-          class="checkbox col-span-2"
+          class="col-span-2"
         />
       </div>
     </div>
@@ -76,17 +77,18 @@ import Input from "../ui/Input.vue";
 import Button from "../ui/Button.vue";
 import { IUser, TGroup, useUserStore } from "../../store/useUserStore.ts";
 import Select from "../ui/Select.vue";
+import CheckBox from "../ui/CheckBox.vue";
 
 export default defineComponent({
   name: "UserForm",
-  components: { Select, Input, Button },
+  components: { CheckBox, Select, Input, Button },
   props: {
     user: {
       type: Object as PropType<IUser | null>,
       required: false,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const userStore = useUserStore();
     const name = ref("");
     const company = ref("");
@@ -106,7 +108,7 @@ export default defineComponent({
     );
 
     function close() {
-      this.$emit("close", false);
+      emit("close", false);
     }
 
     function reset() {
@@ -118,7 +120,6 @@ export default defineComponent({
 
     function submitHandler() {
       if (props.user) {
-        console.log("editUser");
         userStore.editUser({
           ...props.user,
           name: name.value,
@@ -126,7 +127,7 @@ export default defineComponent({
           group: group.value,
           isHere: isHere.value,
         });
-        this.$emit("close", false);
+        emit("close", false);
       } else {
         if (name.value && company.value && group.value) {
           const newUser: IUser = {
@@ -137,7 +138,7 @@ export default defineComponent({
           };
           userStore.addUser(newUser);
           reset();
-          this.$emit("close", false);
+          emit("close", false);
         } else {
           alert("Провал");
         }

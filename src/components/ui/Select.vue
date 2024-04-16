@@ -33,15 +33,13 @@ export default defineComponent({
       required: true,
     },
     modelValue: {
-      type: String as PropType<string>, // тип модели
+      type: String as PropType<string>,
       required: true,
     },
   },
   setup(props, { emit }) {
-    // Создаем реактивную переменную для хранения значения select
     const internalValue: Ref<string> = ref(props.modelValue);
 
-    // Слушаем изменения в select и отправляем событие обновления модели
     const handleChange = () => {
       emit("update:modelValue", internalValue.value);
     };

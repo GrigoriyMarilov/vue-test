@@ -34,7 +34,7 @@ export default defineComponent({
   props: {
     open: { type: Boolean, required: true },
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     function close() {
       emit("close", false);
     }

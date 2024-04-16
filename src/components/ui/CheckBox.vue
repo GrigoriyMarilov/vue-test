@@ -1,8 +1,9 @@
 <template>
   <input
-    class="input shadow-default"
-    @input="handleChange"
-    :value="modelValue"
+    class="checkbox"
+    type="checkbox"
+    :checked="modelValue"
+    @change="handleChange"
   />
 </template>
 
@@ -10,9 +11,10 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Input",
+  name: "CheckBox",
   props: {
     modelValue: {
+      type: Boolean,
       required: true,
     },
   },
@@ -20,8 +22,10 @@ export default defineComponent({
   methods: {
     handleChange(event: Event) {
       const target = event.target as HTMLInputElement;
-      this.$emit("update:modelValue", target.value);
+      this.$emit("update:modelValue", target.checked);
     },
   },
 });
 </script>
+
+<style scoped></style>
