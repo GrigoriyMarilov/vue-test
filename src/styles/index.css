@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+@layer base {
+  :root {
+    --primary: 122 39% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 45%;
+    --secondary-foreground: 0 0% 100;
+    --label-foreground: 37 100% 15%;
+
+    --good: 79 100% 37%;
+    --bad: 11 83% 57%;
+    --border: 0 0% 91%;
+
+    --select: 0 0% 77%;
+    --select-foreground: 0 0% 100%;
+  }
+}
+@layer components {
+  .input {
+    @apply !outline-none block h-[52px] px-[19px] py-[15px] placeholder-select;
+  }
+  .button {
+    @apply py-[14px] px-[75px] rounded-[12px] shadow-default roboto text-2xl;
+  }
+  .checkbox {
+    @apply w-[34px] h-[34px] rounded-[4px] border-2 border-secondary;
+  }
+  .select {
+    @apply !outline-none block h-[52px] px-[19px] py-[15px] placeholder-select;
+  }
+  .roboto {
+    font-family: "Roboto", sans-serif;
+  }
+  .radio-toolbar input[type="radio"]:checked + label {
+    @apply bg-select;
+  }
+}
+@layer utilities {
+  .shadow-default {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 16.1%);
+  }
+}
